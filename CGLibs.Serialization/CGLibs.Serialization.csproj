@@ -6,12 +6,17 @@
 	  <AssemblyOriginatorKeyFile>CGLibsStrongNameKey.snk</AssemblyOriginatorKeyFile>
 	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	  <PackageIconUrl>https://gritton-ng-ux.azurewebsites.net/assets/img/gritton-logov2-green-64x64.png</PackageIconUrl>
+	  <PackageReadmeFile>../README.md</PackageReadmeFile>
+	  <Company>Elk Creek Services</Company>
 	  <Authors>Elk Creek Services,Christopher Gritton</Authors>
 	  <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	  <PackageProjectUrl>https://github.com/christopher-gritton/cglibs-serialization.git</PackageProjectUrl>
+	  <PackageIcon>gritton-logov2-green-64x64.png</PackageIcon>
 	  <PackageTags>serializer serialization xml json datacontract serializable</PackageTags>
-	  <AssemblyVersion>8.50.107.559</AssemblyVersion>
-	  <FileVersion>8.50.107.559</FileVersion>
-	  <Version>8.50.107.559</Version>
+	  <AssemblyVersion>8.51.126.1345</AssemblyVersion>
+	  <FileVersion>8.51.126.1345</FileVersion>
+	  <PrefixVersion>8.51.126.1345</PrefixVersion>
+	  <SuffixVersion>release</SuffixVersion>
 	  <Description>
 		  Xml and Json serialization
 	  </Description>
