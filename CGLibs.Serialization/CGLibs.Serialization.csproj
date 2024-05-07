@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net48;net8.0</TargetFrameworks>
+	  <SignAssembly>true</SignAssembly>
+	  <AssemblyOriginatorKeyFile>CGLibsStrongNameKey.snk</AssemblyOriginatorKeyFile>
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	  <PackageIconUrl>https://gritton-ng-ux.azurewebsites.net/assets/img/gritton-logov2-green-64x64.png</PackageIconUrl>
+	  <Authors>Elk Creek Services,Christopher Gritton</Authors>
+	  <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	  <PackageTags>serializer serialization xml json datacontract serializable</PackageTags>
+	  <AssemblyVersion>8.50.107.559</AssemblyVersion>
+	  <FileVersion>8.50.107.559</FileVersion>
+	  <Version>8.50.107.559</Version>
+	  <Description>
+		  Xml and Json serialization
+	  </Description>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="LICENSE.txt" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+</Project>
