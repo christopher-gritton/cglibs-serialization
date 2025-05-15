@@ -20,6 +20,39 @@ namespace CGLibs.Serialization
         }
 
         public static Xml.XmlSerializationSettings Settings { get; private set; } = new Xml.XmlSerializationSettings();
+        public static DataContractJsonSerializerSettings JsonSettings { get; private set; }
+
+        private DataContractJsonSerializerSettings _jsonSettings
+        {
+            get
+            {
+                if (JsonSettings == null)
+                {
+                    JsonSettings = new DataContractJsonSerializerSettings();
+                }
+                return JsonSettings;
+            }
+            set
+            {
+                JsonSettings = value;
+            }
+        }
+
+        private DataContractJsonSerializerSettings JsonSettingsWithOptions(Action<DataContractJsonSerializerSettings> options)
+        {
+            DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
+            if (JsonSettings != null)
+            {
+                settings = JsonSettings;
+            }
+            if (options != null)
+            {
+                options(settings);                
+            }
+
+            return settings;
+        }
+
 
         /// <summary>
         /// Converts this instance.
@@ -218,13 +251,13 @@ namespace CGLibs.Serialization
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
         /// <returns>System.String.</returns>
-        public string ToJson<T>(T source) where T : class
+        public string ToJson<T>(T source, Action<DataContractJsonSerializerSettings> options = null) where T : class
         {
             string serialized = string.Empty;
 
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
-                DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T));
+                DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T), JsonSettingsWithOptions(options));
                 json.WriteObject(ms, source);
 
                 //reset stream for reading
@@ -239,16 +272,17 @@ namespace CGLibs.Serialization
             return serialized;
         }
 
-        public string ToJsonDateFormatted<T>(T source) where T : class
+        public string ToJsonDateFormatted<T>(T source, Action<DataContractJsonSerializerSettings> options = null) where T : class
         {
             string serialized = string.Empty;
 
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
-                DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T), new DataContractJsonSerializerSettings
+                DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T), JsonSettingsWithOptions((options == null ? (t) => 
                 {
-                    DateTimeFormat = new DateTimeFormat("yyyy-MM-dd'T'HH:mm:ssK")
-                });
+                    t.DateTimeFormat = new DateTimeFormat("yyyy-MM-dd'T'HH:mm:ssK");
+                } : options)));
+
                 json.WriteObject(ms, source);
 
                 //reset stream for reading
@@ -269,7 +303,7 @@ namespace CGLibs.Serialization
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
         /// <returns>T.</returns>
-        public T FromJson<T>(string source) where T : class
+        public T FromJson<T>(string source, Action<DataContractJsonSerializerSettings> options = null) where T : class
         {
             T deserialized;
 
@@ -284,7 +318,7 @@ namespace CGLibs.Serialization
                     //reset stream for reading
                     ms.Position = 0;
 
-                    DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T));
+                    DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T), JsonSettingsWithOptions(options));
                     deserialized = (T)json.ReadObject(ms);
                 }
             }
@@ -292,7 +326,7 @@ namespace CGLibs.Serialization
             return deserialized;
         }
 
-        public T FromJsonDateFormatted<T>(string source) where T : class
+        public T FromJsonDateFormatted<T>(string source, Action<DataContractJsonSerializerSettings> options = null) where T : class
         {
             T deserialized;
 
@@ -307,10 +341,12 @@ namespace CGLibs.Serialization
                     //reset stream for reading
                     ms.Position = 0;
 
-                    DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T), new DataContractJsonSerializerSettings
+                    DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T), JsonSettingsWithOptions((options == null ? (t) =>
                     {
-                        DateTimeFormat = new DateTimeFormat("yyyy-MM-dd'T'HH:mm:ssK")
-                    });
+                        t.DateTimeFormat = new DateTimeFormat("yyyy-MM-dd'T'HH:mm:ssK");
+                    }
+                    : options)));
+
                     deserialized = (T)json.ReadObject(ms);
                 }
             }
