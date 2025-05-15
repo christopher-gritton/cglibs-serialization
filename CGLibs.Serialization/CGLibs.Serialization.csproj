@@ -13,9 +13,9 @@
 	  <PackageProjectUrl>https://github.com/christopher-gritton/cglibs-serialization.git</PackageProjectUrl>
 	  <PackageIcon>gritton-logov2-green-64x64.png</PackageIcon>
 	  <PackageTags>serializer serialization xml json datacontract serializable</PackageTags>
-	  <AssemblyVersion>8.52.134.966</AssemblyVersion>
-	  <FileVersion>8.52.134.966</FileVersion>
-	  <Version>8.52.134.966</Version>
+	  <AssemblyVersion>8.52.134.967</AssemblyVersion>
+	  <FileVersion>8.52.134.967</FileVersion>
+	  <Version>8.52.134.967</Version>
 	  <Description>
 		  Xml and Json serialization
 	  </Description>
